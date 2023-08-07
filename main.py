@@ -1,35 +1,18 @@
-from dotenv import load_dotenv
-import os
-import cfbd
-from games import getGames
-
-load_dotenv()
-
-
-def apiConfig() -> cfbd.Configuration:
-    CFBD_KEY = os.getenv("CFBD_KEY")
-
-    # Set up API key auth
-    config = cfbd.Configuration()
-    config.api_key["Authorization"] = CFBD_KEY
-    config.api_key_prefix["Authorization"] = "Bearer"
-
-    return config
-
+import time
+from cfbd_api.game import scoreboard
 
 def run():
-    config = apiConfig()
+    currGames = scoreboard(classification="fbs", conference="b12")
+    oldGames = currGames
 
-    # Create instance of Games API class
-    gamesAPI = cfbd.GamesApi(cfbd.ApiClient(config))
+    while True:
+        for game in currGames:
+            print(game)
 
-    # Games API params
-    classification = "fbs"
-    conference = "b12"
+            time.sleep(5)
 
-    currGames = getGames(gamesAPI, classification, conference)
-
-    print(currGames)
+        oldGames = currGames
+        currGames = scoreboard(classification="fbs", conference="b12")
 
 
 if __name__ == "__main__":
