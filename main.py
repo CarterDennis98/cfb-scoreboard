@@ -18,7 +18,7 @@ def run():
                 time.sleep(5)
 
         old_games = curr_games
-        curr_games = scoreboard(classification="fbs", conference="b12")
+        curr_games = scoreboard(teams, classification="fbs", conference="b12")
 
 
 if __name__ == "__main__":
