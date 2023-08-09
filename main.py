@@ -14,6 +14,7 @@ def run():
         if curr_games:
             for game, old_game in zip(curr_games, old_games):
                 print(game)
+                print(game.get_betting())
 
                 time.sleep(5)
 
