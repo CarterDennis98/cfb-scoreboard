@@ -25,10 +25,10 @@ class GameScoreboard:
             return f"{self.home_team.short_name} ({'' if self.betting.spread.startswith('-') else '+'}{self.betting.spread}) O/U {self.betting.over_under}"
 
 
-def scoreboard(teams: list, classification=None, conference=None) -> list:
+def scoreboard(teams: list, classification=None, conference=None) -> list[GameScoreboard]:
     games = []
     data = get_scoreboard(classification, conference)
-    for x in data.json():
-        games.append(GameScoreboard(x, teams))
+    for game in data.json():
+        games.append(GameScoreboard(game, teams))
 
     return games
