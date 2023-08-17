@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     draw = ImageDraw.Draw(image)
 
-    font = ImageFont.truetype("assets/fonts/dot-matrix.ttf", size=9)
+    font = ImageFont.load("assets/fonts/Tamzen5x9r.pil")
 
     white_fill = (255, 255, 255, 255)
     black_fill = (0, 0, 0, 255)
