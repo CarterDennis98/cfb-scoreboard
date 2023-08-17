@@ -18,10 +18,11 @@ def run():
                 print(game)
                 print(game.get_betting())
 
-                draw.text((1,1), game, font=font, fill=white_fill)
+                draw.text((1,1), f"{game.home_team.short_name} vs {game.away_team.short_name}", font=font, fill=white_fill)
                 matrix.SetImage(image)
 
                 time.sleep(5)
+                draw.rectangle([(0, 0),(63, 63)], fill=black_fill)
 
         old_games = curr_games
         curr_games = scoreboard(teams, classification="fbs", conference="b12")
@@ -33,7 +34,7 @@ if __name__ == "__main__":
     options.cols = 64
     options.chain_length = 1
     options.parallel = 1
-    options.gpio_slowdown = 2
+    options.gpio_slowdown = 1
 
     matrix = RGBMatrix(options=options)
 
@@ -41,8 +42,9 @@ if __name__ == "__main__":
 
     draw = ImageDraw.Draw(image)
 
-    font = ImageFont.truetype("assets/fonts/versa.otf", size=8)
+    font = ImageFont.truetype("assets/fonts/versa.otf", size=9)
 
     white_fill = (255, 255, 255, 255)
+    black_fill = (0, 0, 0, 255)
 
     run()
