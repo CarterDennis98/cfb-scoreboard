@@ -7,7 +7,8 @@ from datetime import datetime, timezone
 
 class GameScoreboard:
     def __init__(self, game, teams):
-        self.start_date = format_time(game["startDate"])
+        self.start_date = format_time(game["startDate"]).strftime("%b %d")
+        self.start_time = format_time(game["startDate"]).strftime("%I%M%p")
         self.status = game["status"]
         self.quarter = game["period"]
         self.clock = game["clock"]
@@ -30,8 +31,7 @@ class GameScoreboard:
 def format_time(time: str):
     # Convert ISO 8601 time to Central Time
     utc = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S.%fZ")
-    central = utc.replace(tzinfo=timezone.utc).astimezone(tz=None)
-    return central.strftime("%b%d%I:%M%p")
+    return utc.replace(tzinfo=timezone.utc).astimezone(tz=None)
 
 
 def scoreboard(
