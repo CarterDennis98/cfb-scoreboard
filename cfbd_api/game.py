@@ -21,8 +21,8 @@ class GameScoreboard:
         return f"{self.home_team.short_name} vs {self.away_team.short_name}\n{self.home_team.points or 0} - {self.away_team.points or 0}"
 
     def get_betting(self):
-        if self.betting.spread is None and self.betting.over_under is None:
-            return "No betting info"
+        if self.betting.spread is None:
+            return ""
         else:
             return f"{self.home_team.short_name}{'' if self.betting.spread.startswith('-') else '+'}{self.betting.spread}"
 
