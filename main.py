@@ -18,8 +18,10 @@ def run():
                 print(game)
                 print(game.get_betting())
 
-                draw.text((2, 0), game.home_team.short_name, font=font, fill=white_fill)
-                draw.text((2, 10), game.away_team.short_name, font=font, fill=white_fill)
+                draw.rectangle([(0,0), (3,8)], fill=game.home_team.main_color)
+                draw.text((5, 0), game.home_team.short_name, font=font, fill=white_fill)
+                draw.rectangle([(0,9), (3, 17)], fill=game.away_team.main_color)
+                draw.text((5, 9), game.away_team.short_name, font=font, fill=white_fill)
                 matrix.SetImage(image)
 
                 # Fade into new game

@@ -1,0 +1,17 @@
+e import scoreboard
+from cfbd_api.team import all_teams
+
+
+def run():
+    # Get a list of all teams in order to get logos/colors based on id provided by /scoreboard endpoint
+    teams = all_teams()
+
+    curr_games = scoreboard(teams, classification="fbs", conference="b12")
+    old_games = curr_games
+
+    while True:
+        draw.text((1,1), game[0], font=font, fill=white_fill)
+        matrix.SetImage(image)
+        time.sleep(600)
+
+
