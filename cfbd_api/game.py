@@ -7,6 +7,7 @@ from cfbd_api.data import get_scoreboard
 class GameScoreboard:
     def __init__(self, game, teams):
         self.start_date = game["startDate"]
+        self.status = game["status"]
         self.quarter = game["period"]
         self.clock = game["clock"]
         self.possession = game["possession"]
