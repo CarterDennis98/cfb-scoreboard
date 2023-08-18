@@ -31,7 +31,7 @@ def format_time(time: str):
     # Convert ISO 8601 time to Central Time
     utc = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S.%fZ")
     central = utc.replace(tzinfo=timezone.utc).astimezone(tz=None)
-    return central.strftime("%b %d %I:%M %p")
+    return central.strftime("%b%d%I:%M%p")
 
 
 def scoreboard(
