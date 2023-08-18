@@ -15,8 +15,8 @@ def draw_scheduled_game(game: GameScoreboard):
     # TODO: Draw team records
 
     # TODO: Draw game date and start time
-    draw.text((-1, 18), game.start_date, font=font, fill=white_fill)
-    draw.text((-1, 22), game.start_time, font=font, fill=white_fill)
+    draw.text((-1, 13), game.start_date, font=font, fill=white_fill)
+    draw.text((-1, 18), game.start_time, font=font, fill=white_fill)
 
     # TODO: Draw betting info
 
