@@ -1,8 +1,22 @@
 import time
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from io import BytesIO
+import requests
 from cfbd_api.game import scoreboard, GameScoreboard
 from cfbd_api.team import all_teams
+
+def crop_image(image: Image):
+    bbox = image.getbbox()
+    image = image.crop(bbox)
+
+    width, height = image.size
+
+    cropped_image = Image.new("RGB", (width, height), (0, 0, 0, 255))
+
+    cropped_image.paste(image)
+
+    return cropped_image
 
 
 def draw_scheduled_game(game: GameScoreboard):
@@ -21,6 +35,23 @@ def draw_scheduled_game(game: GameScoreboard):
     draw.text((0,20), game.get_betting(), font=font, fill=white_fill)
 
     # TODO: Draw logos
+    logo_size = (32, 32)
+
+    home_logo = requests.get(game.home_team.logo[0])
+    home_logo = Image.open(BytesIO(home_logo.content))
+    home_logo = crop_image(home_logo)
+    home_logo.thumbnail(logo_size)
+    away_logo = requests.get(game.away_team.logo[0])
+    away_logo = Image.open(BytesIO(away_logo.content))
+    away_logo = crop_image(away_logo)
+    away_logo.thumbnail(logo_size)
+
+    home_logo_width, home_logo_height = home_logo.size
+    away_logo_width, away_logo_height = away_logo.size
+
+    image.paste(home_logo, (0, 32))
+    image.paste(away_logo, (32, 32))
+
 
     # Set image
     matrix.SetImage(image)
