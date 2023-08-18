@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 
 class GameScoreboard:
     def __init__(self, game, teams):
-        self.start_date = format_time(game["startDate"]).strftime("%m/%d %-I:%M%p")
+        self.start_date = format_time(game["startDate"]).strftime("%-m/%-d %-I:%M%p")
         self.status = game["status"]
         self.quarter = game["period"]
         self.clock = game["clock"]
