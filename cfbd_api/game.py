@@ -2,8 +2,7 @@ from cfbd_api.team import ScoreboardTeam
 from cfbd_api.weather import Weather
 from cfbd_api.betting import Betting
 from cfbd_api.data import get_scoreboard
-import datetime as dt
-from pytz import timezone
+from datetime import datetime, timezone
 
 
 class GameScoreboard:
@@ -26,18 +25,18 @@ class GameScoreboard:
             return "No betting info"
         else:
             return f"{self.home_team.short_name} ({'' if self.betting.spread.startswith('-') else '+'}{self.betting.spread}) O/U {self.betting.over_under}"
-        
+
 
 def format_time(time: str):
     # Convert ISO 8601 time to Central Time
-    assert time[-1] == "Z"
-    time = time[:1] + "000"
-    time_dt = dt.datetime.strptime(time, "%Y-%m-%dT%H:%M:%S.%f")
-    time_dt = time_dt.replace(tzinfo=("UTC")).astimezone(timezone("US/Central"))
-    return time_dt.strftime("%b %-d %-I:%M%p")
+    utc = datetime.fromisoformat(time)
+    central = utc.replace(tzinfo=timezone.utc).astimezone(tz=None)
+    return central.strftime("%b %d %I:%M %p")
 
 
-def scoreboard(teams: list, classification=None, conference=None) -> list[GameScoreboard]:
+def scoreboard(
+    teams: list, classification=None, conference=None
+) -> list[GameScoreboard]:
     games = []
     data = get_scoreboard(classification, conference)
     for game in data.json():
