@@ -18,11 +18,24 @@ def run():
                 print(game)
                 print(game.get_betting())
 
-                draw.text((1,1), f"{game.home_team.short_name} vs {game.away_team.short_name}", font=font, fill=white_fill)
+                draw.text((0, 0), game.home_team.short_name, font=font, fill=white_fill)
+                draw.text((0, 6), game.away_team.short_name, font=font, fill=white_fill)
                 matrix.SetImage(image)
 
+                # Fade into new game
+                for brightness in range(0, 100, 10):
+                    matrix.brightness = brightness
+                    matrix.SetImage(image)
+
                 time.sleep(5)
-                draw.rectangle([(0, 0),(63, 63)], fill=black_fill)
+
+                # Fade out
+                for brightness in range(100, 0, -10):
+                    matrix.brightness = brightness
+                    matrix.SetImage(image)
+
+                # Completely black out screen between games
+                draw.rectangle([(0, 0), (63, 63)], fill=black_fill)
 
         old_games = curr_games
         curr_games = scoreboard(teams, classification="fbs", conference="b12")
