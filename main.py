@@ -6,11 +6,11 @@ from cfbd_api.team import all_teams
 
 
 def draw_scheduled_game(game: GameScoreboard):
-    # Draw team names with primary colors
-    draw.rectangle([(0, 0), (3, 8)], fill=game.home_team.main_color)
-    draw.text((5, 0), game.home_team.short_name, font=font, fill=white_fill)
-    draw.rectangle([(0, 9), (3, 17)], fill=game.away_team.main_color)
-    draw.text((5, 9), game.away_team.short_name, font=font, fill=white_fill)
+    # Draw team names with colors
+    draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
+    draw.text((5, -1), game.home_team.short_name, font=font, fill=white_fill)
+    draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
+    draw.text((5, 6), game.away_team.short_name, font=font, fill=white_fill)
 
     # TODO: Draw team records
 
