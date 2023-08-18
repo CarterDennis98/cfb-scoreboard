@@ -24,7 +24,7 @@ class GameScoreboard:
         if self.betting.spread is None and self.betting.over_under is None:
             return "No betting info"
         else:
-            return f"{self.home_team.short_name} ({'' if self.betting.spread.startswith('-') else '+'}{self.betting.spread}) O/U {self.betting.over_under}"
+            return f"{self.home_team.short_name}{'' if self.betting.spread.startswith('-') else '+'}{self.betting.spread} ({self.betting.over_under})"
 
 
 def format_time(time: str):

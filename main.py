@@ -18,7 +18,7 @@ def draw_scheduled_game(game: GameScoreboard):
     draw.text((0, 13), game.start_date, font=font, fill=white_fill)
 
     # TODO: Draw betting info
-    draw.text((0,19), game.get_betting(), font=font, fill=white_fill)
+    draw.text((0,20), game.get_betting(), font=font, fill=white_fill)
 
     # TODO: Draw logos
 
