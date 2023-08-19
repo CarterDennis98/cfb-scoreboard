@@ -5,6 +5,7 @@ from io import BytesIO
 from cfbd_api.game import scoreboard, GameScoreboard
 from cfbd_api.team import all_teams
 
+
 def crop_image(image: Image):
     bbox = image.getbbox()
     image = image.crop(bbox)
@@ -31,21 +32,22 @@ def draw_scheduled_game(game: GameScoreboard):
     draw.text((0, 13), game.start_date, font=font, fill=white_fill)
 
     # Draw betting info
-    draw.text((0,20), game.get_betting(), font=font, fill=white_fill)
+    draw.text((0, 20), game.get_betting(), font=font, fill=white_fill)
 
     # TODO: Draw logos
     logo_size = (32, 32)
 
-    home_logo = f"assets/logos/{game.home_team.classification}/{game.home_team.id}.png"
-    home_logo = Image.open(BytesIO(home_logo))
+    home_logo = Image.open(
+        f"assets/logos/{game.home_team.classification}/{game.home_team.id}.png"
+    )
     home_logo.thumbnail(logo_size)
-    away_logo = f"assets/logos/{game.away_team.classification}/{game.away_team.id}.png"
-    away_logo = Image.open(BytesIO(away_logo))
+    away_logo = Image.open(
+        f"assets/logos/{game.away_team.classification}/{game.away_team.id}.png"
+    )
     away_logo.thumbnail(logo_size)
 
     image.paste(home_logo, (0, 31))
     image.paste(away_logo, (32, 31))
-
 
     # Set image
     matrix.SetImage(image)
