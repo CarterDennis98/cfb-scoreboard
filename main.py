@@ -37,11 +37,11 @@ def draw_scheduled_game(game: GameScoreboard):
     # TODO: Draw logos
     logo_size = (32, 32)
 
-    home_logo = requests.get(game.home_team.logo[0])
+    home_logo = requests.get(game.home_team.logo[1])
     home_logo = Image.open(BytesIO(home_logo.content))
     #home_logo = crop_image(home_logo)
     home_logo.thumbnail(logo_size)
-    away_logo = requests.get(game.away_team.logo[0])
+    away_logo = requests.get(game.away_team.logo[1])
     away_logo = Image.open(BytesIO(away_logo.content))
     #away_logo = crop_image(away_logo)
     away_logo.thumbnail(logo_size)
@@ -50,7 +50,7 @@ def draw_scheduled_game(game: GameScoreboard):
     away_logo_width, away_logo_height = away_logo.size
 
     image.paste(home_logo, (0, 31))
-    image.paste(away_logo, (31, 31))
+    image.paste(away_logo, (32, 31))
 
 
     # Set image
