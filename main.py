@@ -86,7 +86,7 @@ def run():
                     draw_completed_game(game)
 
                 # Fade into new game
-                for brightness in range(0, 15, 10):
+                for brightness in range(0, 80, 8):
                     matrix.brightness = brightness
                     matrix.SetImage(image)
                     time.sleep(0.025)
@@ -94,7 +94,7 @@ def run():
                 time.sleep(5)
 
                 # Fade out
-                for brightness in range(15, 0, -1):
+                for brightness in range(80, 0, -8):
                     matrix.brightness = brightness
                     matrix.SetImage(image)
                     time.sleep(0.025)
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     matrix = RGBMatrix(options=options)
 
-    matrix.brightness = 15
+    matrix.brightness = 80
 
     image = Image.new("RGB", (64, 64))
 
