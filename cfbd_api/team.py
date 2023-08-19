@@ -1,4 +1,4 @@
-from cfbd_api.data import get_teams
+from data import get_teams
 
 
 class Team:
@@ -9,6 +9,7 @@ class Team:
         self.logo = team["logos"]
         self.main_color = team["color"]
         self.alt_color = team["alt_color"]
+        self.classification = team["classification"]
 
 
 class ScoreboardTeam:
@@ -24,12 +25,23 @@ class ScoreboardTeam:
 
 
 def all_teams(conference=None) -> list[Team]:
-    all_teams = []
+    teams = []
     data = get_teams(conference)
     for team in data.json():
-        all_teams.append(Team(team))
+        teams.append(Team(team))
 
-    return all_teams
+    return teams
+
+
+def fbs_fcs_teams() -> list[Team]:
+    teams = all_teams()
+    teams = [
+        team
+        for team in teams
+        if (team.classification == "fbs" or team.classification == "fcs")
+    ]
+
+    return teams
 
 
 def get_team_by_id(id: str, teams: list[Team]):

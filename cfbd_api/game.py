@@ -1,7 +1,7 @@
-from cfbd_api.team import ScoreboardTeam
-from cfbd_api.weather import Weather
-from cfbd_api.betting import Betting
-from cfbd_api.data import get_scoreboard
+from team import ScoreboardTeam
+from weather import Weather
+from betting import Betting
+from data import get_scoreboard
 from datetime import datetime, timezone
 
 
