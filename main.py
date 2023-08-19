@@ -21,6 +21,7 @@ def crop_image(image: Image):
 
 def draw_scheduled_game(game: GameScoreboard):
     # Draw team names with colors
+    # TODO: draw rankings in front of team name
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
     draw.text((5, -1), game.home_team.short_name, font=font, fill=white_fill)
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
@@ -34,7 +35,7 @@ def draw_scheduled_game(game: GameScoreboard):
     # Draw betting info
     draw.text((0, 20), game.get_betting(), font=font, fill=white_fill)
 
-    # TODO: Draw logos
+    # Draw logos
     logo_size = (32, 32)
 
     home_logo = Image.open(
@@ -67,7 +68,7 @@ def run():
     # Get a list of all teams in order to get logos/colors based on id provided by /scoreboard endpoint
     teams = all_teams()
 
-    curr_games = scoreboard(teams, classification="fbs", conference="b12")
+    curr_games = scoreboard(teams, classification="fbs")
     old_games = curr_games
 
     while True:
@@ -102,7 +103,7 @@ def run():
                 draw.rectangle([(0, 0), (63, 63)], fill=black_fill)
 
         old_games = curr_games
-        curr_games = scoreboard(teams, classification="fbs", conference="b12")
+        curr_games = scoreboard(teams, classification="fbs")
 
 
 if __name__ == "__main__":
