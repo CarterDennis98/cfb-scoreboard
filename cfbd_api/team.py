@@ -52,4 +52,4 @@ def get_team_by_id(id: str, teams: list[Team]) -> Team:
 
 
 def get_team_ranking(school: str, rankings: Rankings) -> int:
-    return next((rank.rank for rank in rankings.ranks if rank.school == school))
+    return next((rank.rank for rank in rankings.ranks if rank.school == school), "")
