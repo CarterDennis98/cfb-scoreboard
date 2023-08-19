@@ -1,4 +1,5 @@
 from cfbd_api.data import get_teams
+from cfbd_api.rankings import Rankings
 
 
 class Team:
@@ -13,7 +14,7 @@ class Team:
 
 
 class ScoreboardTeam:
-    def __init__(self, team: Team, teams: list[Team]):
+    def __init__(self, team: Team, teams: list[Team], rankings: Rankings):
         self.id = team["id"]
         self.classification = get_team_by_id(self.id, teams).classification
         self.full_name = team["name"]
@@ -23,6 +24,7 @@ class ScoreboardTeam:
         self.main_color = get_team_by_id(self.id, teams).main_color
         self.alt_color = get_team_by_id(self.id, teams).alt_color
         self.points = team["points"]
+        self.ranking = get_team_ranking(self.school, rankings)
 
 
 def all_teams(conference=None) -> list[Team]:
@@ -45,5 +47,9 @@ def fbs_fcs_teams() -> list[Team]:
     return teams
 
 
-def get_team_by_id(id: str, teams: list[Team]):
+def get_team_by_id(id: str, teams: list[Team]) -> Team:
     return [team for team in teams if team.id == id][0]
+
+
+def get_team_ranking(school: str, rankings: Rankings) -> int:
+    return next((rank.rank for rank in rankings.ranks if rank.school == school))

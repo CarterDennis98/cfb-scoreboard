@@ -1,7 +1,6 @@
 import time
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from io import BytesIO
 from cfbd_api.game import scoreboard, GameScoreboard
 from cfbd_api.team import all_teams
 
@@ -23,9 +22,9 @@ def draw_scheduled_game(game: GameScoreboard):
     # Draw team names with colors
     # TODO: draw rankings in front of team name
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
-    draw.text((5, -1), game.home_team.short_name, font=font, fill=white_fill)
+    draw.text((5, -1), f"{game.home_team.ranking}{game.home_team.short_name}", font=font, fill=white_fill)
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
-    draw.text((5, 6), game.away_team.short_name, font=font, fill=white_fill)
+    draw.text((5, 6), f"{game.away_team.ranking}{game.away_team.short_name}", font=font, fill=white_fill)
 
     # TODO: Draw team records
 
