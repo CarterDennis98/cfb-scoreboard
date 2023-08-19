@@ -38,9 +38,9 @@ def scoreboard(
     teams: list, classification=None, conference=None
 ) -> list[GameScoreboard]:
     games = []
-    games = get_scoreboard(classification, conference)
+    scoreboards = get_scoreboard(classification, conference)
     rankings = get_poll("AP Top 25")
-    for game in games.json():
-        games.append(GameScoreboard(game, teams, rankings))
+    for scoreboard in scoreboards.json():
+        games.append(GameScoreboard(scoreboard, teams, rankings))
 
     return games
