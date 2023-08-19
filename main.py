@@ -11,9 +11,9 @@ def get_draw_start(team: ScoreboardTeam) -> int:
     if not team.ranking:
         return 5
     elif len(str(team.ranking)) == 1:
-        return 9
+        return 10
     else:
-        return 14
+        return 15
 
 
 def draw_scheduled_game(game: GameScoreboard):
@@ -21,7 +21,7 @@ def draw_scheduled_game(game: GameScoreboard):
     # Draw rankings in front of team name
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
     draw.text(
-        (5, -1),
+        (4, -1),
         f"{game.home_team.ranking if game.home_team.ranking else ''}",
         font=font,
         fill=white_fill,
@@ -34,14 +34,14 @@ def draw_scheduled_game(game: GameScoreboard):
     )
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
     draw.text(
-        (5, 6),
+        (4, 6),
         f"{game.away_team.ranking if game.away_team.ranking else ''}",
         font=font,
         fill=white_fill,
     )
     draw.text(
         (get_draw_start(game.away_team), 6),
-        game.home_team.short_name,
+        game.away_team.short_name,
         font=font,
         fill=white_fill,
     )
