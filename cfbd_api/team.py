@@ -1,4 +1,4 @@
-from data import get_teams
+from cfbd_api.data import get_teams
 
 
 class Team:

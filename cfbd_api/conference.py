@@ -1,4 +1,4 @@
-from data import get_conferences
+from cfbd_api.data import get_conferences
 
 
 class Conference:

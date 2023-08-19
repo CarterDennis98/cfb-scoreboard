@@ -2,7 +2,6 @@ import time
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from io import BytesIO
-import requests
 from cfbd_api.game import scoreboard, GameScoreboard
 from cfbd_api.team import all_teams
 
