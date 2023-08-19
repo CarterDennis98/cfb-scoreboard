@@ -35,7 +35,7 @@ def draw_scheduled_game(game: GameScoreboard):
     draw.text((0,20), game.get_betting(), font=font, fill=white_fill)
 
     # TODO: Draw logos
-    logo_size = (30, 30)
+    logo_size = (32, 32)
 
     home_logo = requests.get(game.home_team.logo[0])
     home_logo = Image.open(BytesIO(home_logo.content))
@@ -50,7 +50,7 @@ def draw_scheduled_game(game: GameScoreboard):
     away_logo_width, away_logo_height = away_logo.size
 
     image.paste(home_logo, (0, 31))
-    image.paste(away_logo, (34, 31))
+    image.paste(away_logo, (31, 31))
 
 
     # Set image
