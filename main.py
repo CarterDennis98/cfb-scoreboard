@@ -2,29 +2,50 @@ import time
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from cfbd_api.game import scoreboard, GameScoreboard
+from cfbd_api.team import ScoreboardTeam
 from cfbd_api.team import all_teams
 
 
-def crop_image(image: Image):
-    bbox = image.getbbox()
-    image = image.crop(bbox)
-
-    width, height = image.size
-
-    cropped_image = Image.new("RGB", (width, height), (0, 0, 0, 255))
-
-    cropped_image.paste(image)
-
-    return cropped_image
+# Determine starting point for drawing team name based on whether team is ranked or not
+def get_draw_start(team: ScoreboardTeam, home: bool) -> int:
+    if home:
+        if not team.ranking:
+            return 5
+        elif len(str(team.ranking)) == 1:
+            return 9
+        else:
+            return 14
 
 
 def draw_scheduled_game(game: GameScoreboard):
     # Draw team names with colors
     # Draw rankings in front of team name
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
-    draw.text((5, -1), f"{str(game.home_team.ranking) + ' ' if game.home_team.ranking else ''}{game.home_team.short_name}", font=font, fill=white_fill)
+    draw.text(
+        (5, -1),
+        f"{game.home_team.ranking if game.home_team.ranking else ''}",
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.home_team, True), -1),
+        game.home_team.short_name,
+        font=font,
+        fill=white_fill,
+    )
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
-    draw.text((5, 6), f"{str(game.away_team.ranking) + ' ' if game.away_team.ranking else ''}{game.away_team.short_name}", font=font, fill=white_fill)
+    draw.text(
+        (5, 6),
+        f"{game.away_team.ranking if game.away_team.ranking else ''}",
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.away_team, False), 6),
+        game.home_team.short_name,
+        font=font,
+        fill=white_fill,
+    )
 
     # TODO: Draw team records
 
