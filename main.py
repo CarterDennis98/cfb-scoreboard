@@ -9,19 +9,18 @@ from cfbd_api.team import all_teams
 # Determine x starting point for drawing team name based on whether team is ranked or not
 def get_draw_start(team: ScoreboardTeam) -> int:
     if not team.ranking:
-        return 5
+        return 6
     elif len(str(team.ranking)) == 1:
-        return 10
+        return 11
     else:
-        return 15
+        return 16
 
 
 def draw_scheduled_game(game: GameScoreboard):
     # Draw team names with colors
-    # Draw rankings in front of team name
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
     draw.text(
-        (4, -1),
+        (5, -1),
         f"{game.home_team.ranking if game.home_team.ranking else ''}",
         font=font,
         fill=white_fill,
@@ -34,7 +33,7 @@ def draw_scheduled_game(game: GameScoreboard):
     )
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
     draw.text(
-        (4, 6),
+        (5, 6),
         f"{game.away_team.ranking if game.away_team.ranking else ''}",
         font=font,
         fill=white_fill,
@@ -87,7 +86,7 @@ def run():
     # Get a list of all teams in order to get logos/colors based on id provided by /scoreboard endpoint
     teams = all_teams()
 
-    curr_games = scoreboard(teams, classification="fbs")
+    curr_games = scoreboard(teams, classification="fbs", conference="sec")
     old_games = curr_games
 
     while True:
@@ -122,7 +121,7 @@ def run():
                 draw.rectangle([(0, 0), (63, 63)], fill=black_fill)
 
         old_games = curr_games
-        curr_games = scoreboard(teams, classification="fbs")
+        curr_games = scoreboard(teams, classification="fbs", conference="sec")
 
 
 if __name__ == "__main__":
