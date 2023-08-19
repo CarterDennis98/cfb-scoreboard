@@ -28,8 +28,3 @@ def fbs_fcs_conferences() -> list[Conference]:
     ]
 
     return conferences
-
-
-data = fbs_fcs_conferences()
-for conf in data:
-    print(f"{conf.name} ({conf.abbreviation}) - {conf.classification}")

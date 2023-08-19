@@ -28,26 +28,21 @@ def draw_scheduled_game(game: GameScoreboard):
 
     # TODO: Draw team records
 
-    # TODO: Draw game date and start time
+    # Draw game date and start time
     draw.text((0, 13), game.start_date, font=font, fill=white_fill)
 
-    # TODO: Draw betting info
+    # Draw betting info
     draw.text((0,20), game.get_betting(), font=font, fill=white_fill)
 
     # TODO: Draw logos
     logo_size = (32, 32)
 
-    home_logo = requests.get(game.home_team.logo[1])
-    home_logo = Image.open(BytesIO(home_logo.content))
-    #home_logo = crop_image(home_logo)
+    home_logo = f"assets/logos/{game.home_team.classification}/{game.home_team.id}.png"
+    home_logo = Image.open(BytesIO(home_logo))
     home_logo.thumbnail(logo_size)
-    away_logo = requests.get(game.away_team.logo[1])
-    away_logo = Image.open(BytesIO(away_logo.content))
-    #away_logo = crop_image(away_logo)
+    away_logo = f"assets/logos/{game.away_team.classification}/{game.away_team.id}.png"
+    away_logo = Image.open(BytesIO(away_logo))
     away_logo.thumbnail(logo_size)
-
-    home_logo_width, home_logo_height = home_logo.size
-    away_logo_width, away_logo_height = away_logo.size
 
     image.paste(home_logo, (0, 31))
     image.paste(away_logo, (32, 31))

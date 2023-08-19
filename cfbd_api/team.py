@@ -15,6 +15,7 @@ class Team:
 class ScoreboardTeam:
     def __init__(self, team: Team, teams: list[Team]):
         self.id = team["id"]
+        self.classification = get_team_by_id(self.id, teams).classification
         self.full_name = team["name"]
         self.school = get_team_by_id(self.id, teams).school
         self.short_name = get_team_by_id(self.id, teams).short_name
