@@ -6,15 +6,14 @@ from cfbd_api.team import ScoreboardTeam
 from cfbd_api.team import all_teams
 
 
-# Determine starting point for drawing team name based on whether team is ranked or not
-def get_draw_start(team: ScoreboardTeam, home: bool) -> int:
-    if home:
-        if not team.ranking:
-            return 5
-        elif len(str(team.ranking)) == 1:
-            return 9
-        else:
-            return 14
+# Determine x starting point for drawing team name based on whether team is ranked or not
+def get_draw_start(team: ScoreboardTeam) -> int:
+    if not team.ranking:
+        return 5
+    elif len(str(team.ranking)) == 1:
+        return 9
+    else:
+        return 14
 
 
 def draw_scheduled_game(game: GameScoreboard):
@@ -28,7 +27,7 @@ def draw_scheduled_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.home_team, True), -1),
+        (get_draw_start(game.home_team), -1),
         game.home_team.short_name,
         font=font,
         fill=white_fill,
@@ -41,7 +40,7 @@ def draw_scheduled_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.away_team, False), 6),
+        (get_draw_start(game.away_team), 6),
         game.home_team.short_name,
         font=font,
         fill=white_fill,
