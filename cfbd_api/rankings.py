@@ -1,4 +1,4 @@
-from cfbd_api.data import get_rankings
+from data import get_rankings
 from datetime import datetime
 
 

@@ -1,5 +1,5 @@
-from cfbd_api.data import get_teams
-from cfbd_api.rankings import Rankings
+from data import get_teams
+from rankings import Rankings
 
 
 class Team:
