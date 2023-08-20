@@ -6,14 +6,20 @@ from cfbd_api.team import ScoreboardTeam
 from cfbd_api.team import all_teams
 
 
-# Determine x starting point for drawing team name based on whether team is ranked or not
-def get_draw_start(team: ScoreboardTeam) -> int:
-    if not team.ranking:
-        return 6
-    elif len(str(team.ranking)) == 1:
-        return 11
-    else:
-        return 16
+# Determine x starting point for drawing certain features
+def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
+    if feature == "name":
+        if not team.ranking:
+            return 6
+        elif len(str(team.ranking)) == 1:
+            return 11
+        else:
+            return 16
+    elif feature == "score":
+        if len(str(team.points)) == 1:
+            return 58
+        elif len(str(team.points)) == 2:
+            return 52
 
 
 def draw_scheduled_game(game: GameScoreboard):
@@ -26,7 +32,7 @@ def draw_scheduled_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.home_team), -1),
+        (get_draw_start(game.home_team, "name"), -1),
         game.home_team.short_name,
         font=font,
         fill=white_fill,
@@ -39,7 +45,7 @@ def draw_scheduled_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.away_team), 6),
+        (get_draw_start(game.away_team, "name"), 6),
         game.away_team.short_name,
         font=font,
         fill=white_fill,
@@ -73,7 +79,7 @@ def draw_scheduled_game(game: GameScoreboard):
 
 
 def draw_active_game(game: GameScoreboard):
-    # TODO: Draw team names, rankings with colors
+    # Draw team names, rankings with colors
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
     draw.text(
         (5, -1),
@@ -82,7 +88,7 @@ def draw_active_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.home_team), -1),
+        (get_draw_start(game.home_team, "name"), -1),
         game.home_team.short_name,
         font=font,
         fill=white_fill,
@@ -95,7 +101,7 @@ def draw_active_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.away_team), 6),
+        (get_draw_start(game.away_team, "name"), 6),
         game.away_team.short_name,
         font=font,
         fill=white_fill,
@@ -104,6 +110,18 @@ def draw_active_game(game: GameScoreboard):
     # TODO: Draw possession indicator
 
     # TODO: Draw score
+    draw.text(
+        (get_draw_start(game.home_team, "score"), -1),
+        game.home_team.points,
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.away_team, "score"), -1),
+        game.away_team.points,
+        font=font,
+        fill=white_fill,
+    )
 
     # TODO: Draw quarter and clock
 
