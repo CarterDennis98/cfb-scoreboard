@@ -294,7 +294,6 @@ if __name__ == "__main__":
     options.cols = 64
     options.chain_length = 1
     options.parallel = 1
-    options.gpio_slowdown = 1
 
     matrix = RGBMatrix(options=options)
 

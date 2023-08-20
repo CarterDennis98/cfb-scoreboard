@@ -4,7 +4,7 @@ cd /home/carter/Documents/GitHub/cfb-scoreboard
 n=0
 until [ $n -ge 10]
 do
-    sudo -E python3 main.py && break
+    sudo -E python3 main.py --led-gpio-mapping=adaruit-hat-pwm --led-slowdown-gpio=2 && break
     n=$[$n+1]
     sleep 10
 done
