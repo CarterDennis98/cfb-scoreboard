@@ -46,11 +46,11 @@ def get_poss(game: GameScoreboard, y:str) -> int:
             return 0
         else:
             return 6
-    else:
+    elif game.possession == game.away_team.school or None:
         if y == "y1":
-            return 6
+            return 7
         else:
-            return 12
+            return 13
 
 
 def draw_scheduled_game(game: GameScoreboard):
