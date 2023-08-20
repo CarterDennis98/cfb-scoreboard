@@ -256,11 +256,8 @@ def run():
     while True:
         if curr_games:
             for game, old_game in zip(curr_games, old_games):
-                print(game)
-                print(game.get_betting())
-
                 # Draw screen based on game status
-                if game.status == "in_progress":
+                if game.status == "scheduled":
                     draw_scheduled_game(game)
                 elif game.status == "in_progress":
                     draw_active_game(game)
