@@ -264,7 +264,7 @@ def run():
                     draw_scheduled_game(game)
                 elif game.status == "in_progress":
                     draw_active_game(game)
-                elif game.status == "scheduled":
+                elif game.status == "completed":
                     draw_completed_game(game)
 
                 # Fade into new game
