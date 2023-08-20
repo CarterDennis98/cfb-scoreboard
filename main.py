@@ -158,8 +158,8 @@ def draw_active_game(game: GameScoreboard):
         fill=white_fill,
     )
 
-    # TODO: Draw quarter and clock
-    draw.text((0, 13), f"Q{game.quarter or 1}", font=font, fill=white_fill)
+    # Draw quarter and clock
+    draw.text((0, 13), f"{game.quarter or 1}Q", font=font, fill=white_fill)
     draw.text((10, 13), game.clock or "15:00", font=font, fill=white_fill)
 
     # Draw logos
@@ -182,8 +182,68 @@ def draw_active_game(game: GameScoreboard):
 
 
 def draw_completed_game(game: GameScoreboard):
-    # TODO: write function
-    print("Draw completed game")
+    # Draw team names, rankings with colors
+    draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
+    draw.text(
+        (get_draw_start(game.home_team, "rank"), -1),
+        f"{game.home_team.ranking if game.home_team.ranking else ''}",
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.home_team, "name"), -1),
+        game.home_team.short_name,
+        font=font,
+        fill=white_fill,
+    )
+    draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
+    draw.text(
+        (get_draw_start(game.home_team, "rank"), 6),
+        f"{game.away_team.ranking if game.away_team.ranking else ''}",
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.away_team, "name"), 6),
+        game.away_team.short_name,
+        font=font,
+        fill=white_fill,
+    )
+
+    # Draw final scores
+    draw.text(
+        (get_draw_start(game.home_team, "score"), -1),
+        game.home_team.points or "0",
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.away_team, "score"), 6),
+        game.away_team.points or "0",
+        font=font,
+        fill=white_fill,
+    )
+
+    # Draw "Final"
+    draw.text((0, 13), "FINAL", font=font, fill=white_fill)
+
+    # Draw Logos
+    logo_size = (32, 32)
+
+    home_logo = Image.open(
+        f"assets/logos/{game.home_team.classification}/{game.home_team.id}.png"
+    )
+    home_logo.thumbnail(logo_size)
+    away_logo = Image.open(
+        f"assets/logos/{game.away_team.classification}/{game.away_team.id}.png"
+    )
+    away_logo.thumbnail(logo_size)
+
+    image.paste(home_logo, (0, 31))
+    image.paste(away_logo, (32, 31))
+
+    # Set image
+    matrix.SetImage(image)
 
 
 def run():
@@ -202,9 +262,9 @@ def run():
                 # Draw screen based on game status
                 if game.status == "in_progress":
                     draw_scheduled_game(game)
-                elif game.status == "scheduled":
+                elif game.status == "in_progress":
                     draw_active_game(game)
-                elif game.status == "completed":
+                elif game.status == "scheduled":
                     draw_completed_game(game)
 
                 # Fade into new game
