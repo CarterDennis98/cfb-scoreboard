@@ -138,7 +138,7 @@ def draw_active_game(game: GameScoreboard):
         fill=white_fill,
     )
 
-    # TODO: Draw possession indicator
+    # Draw possession indicator
     if game.possession:
         draw.line(
             [(4, get_poss(game, "y1")), (4, get_poss(game, "y2"))], fill=yellow_fill
@@ -159,6 +159,8 @@ def draw_active_game(game: GameScoreboard):
     )
 
     # TODO: Draw quarter and clock
+    draw.text((0, 13), f"Q{game.quarter or 1}", font=font, fill=white_fill)
+    draw.text((10, 13), game.clock or "15:00", font=font, fill=white_fill)
 
     # Draw logos
     logo_size = (32, 32)
