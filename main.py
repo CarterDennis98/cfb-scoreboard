@@ -12,9 +12,15 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
         if not team.ranking:
             return 6
         elif len(str(team.ranking)) == 1:
-            return 11
+            if str(team.ranking).startswith("1"):
+                return 10
+            else:
+                return 11
         else:
-            return 16
+            if str(team.ranking).startswith("1"):
+                return 15
+            else:
+                return 16
     elif feature == "score":
         if len(str(team.points or 0)) == 1:
             return 59
