@@ -8,6 +8,13 @@ from cfbd_api.team import all_teams
 
 # Determine x starting point for drawing certain features
 def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
+    if feature == "rank":
+        if not team.ranking:
+            return 6
+        if str(team.ranking).startswith("2"):
+            return 6
+        else:
+            return 5
     if feature == "name":
         if not team.ranking:
             return 6
@@ -88,7 +95,7 @@ def draw_active_game(game: GameScoreboard):
     # Draw team names, rankings with colors
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
     draw.text(
-        (5, -1),
+        (get_draw_start(game.home_team, "rank"), -1),
         f"{game.home_team.ranking if game.home_team.ranking else ''}",
         font=font,
         fill=white_fill,
@@ -101,7 +108,7 @@ def draw_active_game(game: GameScoreboard):
     )
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
     draw.text(
-        (5, 6),
+        (get_draw_start(game.home_team, "rank"), 6),
         f"{game.away_team.ranking if game.away_team.ranking else ''}",
         font=font,
         fill=white_fill,
