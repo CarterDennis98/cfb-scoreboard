@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/home/carter/Documents/GitHub/cfb-scoreboard")
+
 import time
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
