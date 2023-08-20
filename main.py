@@ -16,10 +16,10 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
         else:
             return 16
     elif feature == "score":
-        if len(str(team.points)) == 1:
-            return 58
-        elif len(str(team.points)) == 2:
-            return 52
+        if len(str(team.points or 0)) == 1:
+            return 59
+        elif len(str(team.points or 0)) == 2:
+            return 54
 
 
 def draw_scheduled_game(game: GameScoreboard):
@@ -109,16 +109,16 @@ def draw_active_game(game: GameScoreboard):
 
     # TODO: Draw possession indicator
 
-    # TODO: Draw score
+    # Draw score
     draw.text(
-        (58, -1),  # (get_draw_start(game.home_team, "score"), -1),
-        7,  # game.home_team.points,
+        (get_draw_start(game.home_team, "score"), -1),
+        game.home_team.points or "0",
         font=font,
         fill=white_fill,
     )
     draw.text(
-        (52, -1),  # (get_draw_start(game.away_team, "score"), -1),
-        24,  # game.away_team.points,
+        (get_draw_start(game.away_team, "score"), 6),
+        game.away_team.points or "0",
         font=font,
         fill=white_fill,
     )
