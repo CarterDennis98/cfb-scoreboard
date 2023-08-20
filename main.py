@@ -40,13 +40,13 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
             return 54
 
 
-def get_poss(game: GameScoreboard, y:str) -> int:
+def get_poss(game: GameScoreboard, y: str) -> int:
     if game.possession or "Vanderbilt" == game.home_team.school:
         if y == "y1":
             return 0
         else:
             return 6
-    elif game.possession == game.away_team.school or None:
+    elif game.possession == game.away_team.school:
         if y == "y1":
             return 7
         else:
@@ -139,7 +139,10 @@ def draw_active_game(game: GameScoreboard):
     )
 
     # TODO: Draw possession indicator
-    draw.line([(4, get_poss(game, "y1")), (4, get_poss(game, "y2"))], fill=yellow_fill)
+    if game.possession:
+        draw.line(
+            [(4, get_poss(game, "y1")), (4, get_poss(game, "y2"))], fill=yellow_fill
+        )
 
     # Draw score
     draw.text(
