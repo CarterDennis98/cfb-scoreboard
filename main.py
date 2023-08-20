@@ -44,7 +44,7 @@ def draw_scheduled_game(game: GameScoreboard):
     # Draw team names, rankings with colors
     draw.rectangle([(0, 0), (3, 6)], fill=game.home_team.main_color)
     draw.text(
-        (5, -1),
+        (get_draw_start(game.home_team, "rank"), -1),
         f"{game.home_team.ranking if game.home_team.ranking else ''}",
         font=font,
         fill=white_fill,
@@ -57,7 +57,7 @@ def draw_scheduled_game(game: GameScoreboard):
     )
     draw.rectangle([(0, 7), (3, 13)], fill=game.away_team.main_color)
     draw.text(
-        (5, 6),
+        (get_draw_start(game.home_team, "rank"), 6),
         f"{game.away_team.ranking if game.away_team.ranking else ''}",
         font=font,
         fill=white_fill,
@@ -126,6 +126,7 @@ def draw_active_game(game: GameScoreboard):
     )
 
     # TODO: Draw possession indicator
+    draw.line([(5, 0), (5, 7)], fill=yellow_fill)
 
     # Draw score
     draw.text(
@@ -143,7 +144,7 @@ def draw_active_game(game: GameScoreboard):
 
     # TODO: Draw quarter and clock
 
-    # TODO: Draw logos
+    # Draw logos
     logo_size = (32, 32)
 
     home_logo = Image.open(
@@ -229,5 +230,6 @@ if __name__ == "__main__":
 
     white_fill = (255, 255, 255, 255)
     black_fill = (0, 0, 0, 255)
+    yellow_fill = (237, 205, 59, 255)
 
     run()
