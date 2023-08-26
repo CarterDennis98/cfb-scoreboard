@@ -12,7 +12,7 @@ class Record:
         self.team = record["team"]
         self.games = record["total"]["games"]
         self.wins = record["total"]["wins"]
-        self.losses = record["tota"]["losses"]
+        self.losses = record["total"]["losses"]
 
 
 def all_records() -> Records:
