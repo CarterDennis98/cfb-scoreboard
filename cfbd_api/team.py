@@ -57,7 +57,7 @@ def get_team_ranking(school: str, rankings: Rankings) -> int:
     return next((rank.rank for rank in rankings.ranks if rank.school == school), None)
 
 
-def get_team_record(team: str, records: list[Record]):
+def get_team_record(team: str, records: list[Record]) -> Record:
     if len(records) > 0:
         return (record for record in records if record.team == team)
     else:
