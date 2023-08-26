@@ -1,5 +1,6 @@
-from cfbd_api.data import get_teams
+from cfbd_api.data import get_teams, get_records
 from cfbd_api.rankings import Rankings
+from datetime import datetime
 
 
 class Team:
@@ -25,6 +26,7 @@ class ScoreboardTeam:
         self.alt_color = get_team_by_id(self.id, teams).alt_color
         self.points = team["points"]
         self.ranking = get_team_ranking(self.school, rankings)
+        self.record = get_team_record(datetime.today().year, self.school)
 
 
 def all_teams(conference=None) -> list[Team]:
@@ -53,3 +55,13 @@ def get_team_by_id(id: str, teams: list[Team]) -> Team:
 
 def get_team_ranking(school: str, rankings: Rankings) -> int:
     return next((rank.rank for rank in rankings.ranks if rank.school == school), None)
+
+
+def get_team_record(year: int, team: str, conference=None):
+    record = get_records(year, team)
+
+    if len(record > 0):
+        curr_record = record[0]
+        return f"{curr_record['total']['wins']}-{curr_record['total']['losses']}"
+    else:
+        return "0-0"

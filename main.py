@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append("/home/carter/Documents/GitHub/cfb-scoreboard")
 
 import time
@@ -41,6 +42,11 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
             return 59
         elif len(str(team.points or 0)) == 2:
             return 54
+    elif feature == "record":
+        if len(team.record) == 3:
+            return 49
+        else:
+            return 44
 
 
 def get_poss(game: GameScoreboard, y: str) -> int:
@@ -86,6 +92,18 @@ def draw_scheduled_game(game: GameScoreboard):
     )
 
     # TODO: Draw team records
+    draw.text(
+        (get_draw_start(game.home_team, "record"), 0),
+        game.home_team.record,
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.away_team, "record"), 0),
+        game.away_team.record,
+        font=font,
+        fill=white_fill,
+    )
 
     # Draw game date and start time
     draw.text((0, 13), game.start_date, font=font, fill=white_fill)
