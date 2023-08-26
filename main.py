@@ -242,13 +242,13 @@ def draw_completed_game(game: GameScoreboard):
     # Draw final scores
     draw.text(
         (get_draw_start(game.home_team, "score"), -1),
-        game.home_team.points or "0",
+        str(game.home_team.points),
         font=font,
         fill=white_fill,
     )
     draw.text(
         (get_draw_start(game.away_team, "score"), 6),
-        game.away_team.points or "0",
+        str(game.away_team.points),
         font=font,
         fill=white_fill,
     )
