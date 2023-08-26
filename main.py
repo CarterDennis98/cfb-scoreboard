@@ -45,7 +45,7 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
             return 54
     elif feature == "record":
         if team.record:
-            if len(str(team.record.wins) + "-" + str(team.record.losses)) == 3:
+            if len(str(team.record.wins)) == 2 or len(str(team.record.losses)) == 2:
                 return 49
             else:
                 return 44
@@ -255,6 +255,8 @@ def draw_completed_game(game: GameScoreboard):
 
     # Draw "Final"
     draw.text((0, 13), "FINAL", font=font, fill=white_fill)
+
+    # TODO: Draw new records
 
     # Draw Logos
     logo_size = (32, 32)
