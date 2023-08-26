@@ -43,7 +43,7 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
         elif len(str(team.points or 0)) == 2:
             return 54
     elif feature == "record":
-        if len(team.record):
+        if team.record:
             if len(team.record) == 3:
                 return 49
             else:
