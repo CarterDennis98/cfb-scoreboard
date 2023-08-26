@@ -1,7 +1,7 @@
 from cfbd_api.team import ScoreboardTeam
 from cfbd_api.weather import Weather
 from cfbd_api.betting import Betting
-from cfbd_api.data import get_scoreboard
+from cfbd_api.data import get_scoreboard, get_records
 from datetime import datetime, timezone
 from cfbd_api.rankings import get_poll
 
@@ -40,7 +40,8 @@ def scoreboard(
     games = []
     scoreboards = get_scoreboard(classification, conference)
     rankings = get_poll("AP Top 25")
+    records = get_records(datetime.today().year)
     for scoreboard in scoreboards.json():
-        games.append(GameScoreboard(scoreboard, teams, rankings))
+        games.append(GameScoreboard(scoreboard, teams, rankings, records))
 
     return games

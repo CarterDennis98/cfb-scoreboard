@@ -52,10 +52,10 @@ def get_rankings(year: int, week=None, seasonType=None):
         raise ValueError(e)
 
 
-def get_records(year: int, team: str, conference=None):
+def get_records(year: int, team=None, conference=None):
     try:
         data = requests.get(
-            RECORDS_URL.format(year, team, conference or ""), headers=HEADERS
+            RECORDS_URL.format(year, team or "", conference or ""), headers=HEADERS
         )
         return data
     except requests.exceptions.RequestException as e:

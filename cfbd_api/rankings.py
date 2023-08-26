@@ -26,5 +26,5 @@ def all_rankings() -> list[Rankings]:
 
 def get_poll(poll_name: str) -> Rankings:
     polls = all_rankings()
-    ap_poll = next((poll for poll in polls if poll.poll == poll_name), None)
-    return ap_poll
+    poll = next((poll for poll in polls if poll.poll == poll_name), None)
+    return poll
