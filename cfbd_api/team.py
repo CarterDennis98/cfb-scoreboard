@@ -62,6 +62,7 @@ def get_team_record(year: int, team: str, conference=None):
 
     if len(record) > 0:
         curr_record = record[0]
+        print(curr_record)
         return f"{curr_record['total']['wins']}-{curr_record['total']['losses']}"
     else:
         return "0-0"
