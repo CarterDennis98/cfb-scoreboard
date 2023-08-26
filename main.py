@@ -189,7 +189,7 @@ def draw_active_game(game: GameScoreboard):
 
     # Draw quarter and clock
     draw.text((0, 13), f"{game.quarter or 1}Q", font=font, fill=white_fill)
-    draw.text((10, 13), game.clock or "15:00", font=font, fill=white_fill)
+    draw.text((10, 13), game.clock[3:] or "15:00", font=font, fill=white_fill)
 
     # Draw logos
     logo_size = (32, 32)
