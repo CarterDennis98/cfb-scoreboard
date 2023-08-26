@@ -7,14 +7,14 @@ from cfbd_api.rankings import get_poll
 
 
 class GameScoreboard:
-    def __init__(self, game, teams, rankings):
+    def __init__(self, game, teams, rankings, records):
         self.start_date = format_time(game["startDate"]).strftime("%-m/%-d %-I:%M%p")
         self.status = game["status"]
         self.quarter = game["period"]
         self.clock = game["clock"]
         self.possession = game["possession"]
-        self.home_team = ScoreboardTeam(game["homeTeam"], teams, rankings)
-        self.away_team = ScoreboardTeam(game["awayTeam"], teams, rankings)
+        self.home_team = ScoreboardTeam(game["homeTeam"], teams, rankings, records)
+        self.away_team = ScoreboardTeam(game["awayTeam"], teams, rankings, records)
         self.weather = Weather(game["weather"])
         self.betting = Betting(game["betting"])
 
