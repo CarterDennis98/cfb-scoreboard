@@ -58,9 +58,9 @@ def get_team_ranking(school: str, rankings: Rankings) -> int:
 
 
 def get_team_record(year: int, team: str, conference=None):
-    record = get_records(year, team)
+    record = get_records(year, team).json()
 
-    if record:
+    if record[0]:
         curr_record = record[0]
         return f"{curr_record['total']['wins']}-{curr_record['total']['losses']}"
     else:
