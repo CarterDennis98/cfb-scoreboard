@@ -95,7 +95,7 @@ def draw_scheduled_game(game: GameScoreboard):
         fill=white_fill,
     )
 
-    # TODO: Draw team records
+    # Draw team records
     draw.text(
         (get_draw_start(game.home_team, "record"), -1),
         f"{game.home_team.record.wins or 0} - {game.home_team.record.losses or 0}"
