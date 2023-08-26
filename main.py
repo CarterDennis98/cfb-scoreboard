@@ -99,7 +99,7 @@ def draw_scheduled_game(game: GameScoreboard):
         fill=white_fill,
     )
     draw.text(
-        (get_draw_start(game.away_team, "record"), -1),
+        (get_draw_start(game.away_team, "record"), 6),
         f"{game.away_team.record.wins or 0} - {game.away_team.record.losses or 0}",
         font=font,
         fill=white_fill,
