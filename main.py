@@ -54,12 +54,12 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
 
 
 def get_poss(game: GameScoreboard, y: str) -> int:
-    if game.possession == game.home_team.school:
+    if game.possession == "home":
         if y == "y1":
             return 0
         else:
             return 6
-    elif game.possession == game.away_team.school:
+    elif game.possession == "away":
         if y == "y1":
             return 7
         else:
