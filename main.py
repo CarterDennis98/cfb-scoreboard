@@ -44,7 +44,7 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
 
 
 def get_poss(game: GameScoreboard, y: str) -> int:
-    if game.possession or "Vanderbilt" == game.home_team.school:
+    if game.possession == game.home_team.school:
         if y == "y1":
             return 0
         else:
@@ -253,7 +253,7 @@ def run():
     # Get a list of all teams in order to get logos/colors based on id provided by /scoreboard endpoint
     teams = all_teams()
 
-    curr_games = scoreboard(teams, classification="fbs", conference="sec")
+    curr_games = scoreboard(teams, classification="fbs")
     old_games = curr_games
 
     while True:
@@ -285,7 +285,7 @@ def run():
                 draw.rectangle([(0, 0), (63, 63)], fill=black_fill)
 
         old_games = curr_games
-        curr_games = scoreboard(teams, classification="fbs", conference="sec")
+        curr_games = scoreboard(teams, classification="fbs")
 
 
 if __name__ == "__main__":
