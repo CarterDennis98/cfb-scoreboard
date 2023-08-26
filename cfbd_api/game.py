@@ -41,7 +41,6 @@ def scoreboard(
     scoreboards = get_scoreboard(classification, conference)
     rankings = get_poll("AP Top 25")
     records = get_records(datetime.today().year)
-    print(records)
     for scoreboard in scoreboards.json():
         games.append(GameScoreboard(scoreboard, teams, rankings, records))
 
