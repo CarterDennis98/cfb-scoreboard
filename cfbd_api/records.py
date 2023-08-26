@@ -21,4 +21,5 @@ def all_records() -> Records:
     for record in data.json():
         records.append(Record(record))
 
+    print(records)
     return Records(records)
