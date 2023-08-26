@@ -58,7 +58,7 @@ def get_team_ranking(school: str, rankings: Rankings) -> int:
 
 
 def get_team_record(year: int, team: str, conference=None):
-    record = get_records(year, team)
+    record = get_records(year, team).json()
 
     if len(record) > 0:
         curr_record = record[0]

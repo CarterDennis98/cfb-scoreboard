@@ -57,7 +57,6 @@ def get_records(year: int, team: str, conference=None):
         data = requests.get(
             RECORDS_URL.format(year, team, conference or ""), headers=HEADERS
         )
-        print(data.json())
         return data
     except requests.exceptions.RequestException as e:
         raise ValueError(e)
