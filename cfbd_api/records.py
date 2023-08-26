@@ -19,6 +19,7 @@ def all_records() -> Records:
     records = []
     data = get_records(datetime.today().year)
     for record in data.json():
+        print(record)
         records.append(Record(record))
 
     return Records(records)
