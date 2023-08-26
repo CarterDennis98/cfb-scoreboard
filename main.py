@@ -97,13 +97,17 @@ def draw_scheduled_game(game: GameScoreboard):
     # TODO: Draw team records
     draw.text(
         (get_draw_start(game.home_team, "record"), -1),
-        f"{game.home_team.record.wins or 0} - {game.home_team.record.losses or 0}",
+        f"{game.home_team.record.wins or 0} - {game.home_team.record.losses or 0}"
+        if game.home_team.record
+        else "0-0",
         font=font,
         fill=white_fill,
     )
     draw.text(
         (get_draw_start(game.away_team, "record"), 6),
-        f"{game.away_team.record.wins or 0} - {game.away_team.record.losses or 0}",
+        f"{game.away_team.record.wins or 0} - {game.away_team.record.losses or 0}"
+        if game.away_team.record
+        else "0-0",
         font=font,
         fill=white_fill,
     )
