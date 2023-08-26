@@ -1,7 +1,6 @@
-from cfbd_api.data import get_teams, get_records
+from cfbd_api.data import get_teams
 from cfbd_api.rankings import Rankings
-from datetime import datetime
-from cfbd_api.records import Record
+from cfbd_api.records import Records, Record
 
 
 class Team:
@@ -16,7 +15,7 @@ class Team:
 
 
 class ScoreboardTeam:
-    def __init__(self, team: Team, teams: list[Team], rankings: Rankings, records):
+    def __init__(self, team: Team, teams: list[Team], rankings: Rankings, records: Records):
         self.id = team["id"]
         self.classification = get_team_by_id(self.id, teams).classification
         self.full_name = team["name"]
@@ -27,7 +26,7 @@ class ScoreboardTeam:
         self.alt_color = get_team_by_id(self.id, teams).alt_color
         self.points = team["points"]
         self.ranking = get_team_ranking(self.school, rankings)
-        self.record = get_team_record(self.school, records)
+        self.record = get_team_record(self.school, records.records)
 
 
 def all_teams(conference=None) -> list[Team]:
