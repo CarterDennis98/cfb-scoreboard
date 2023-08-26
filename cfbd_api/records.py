@@ -4,7 +4,7 @@ from datetime import datetime
 
 class Records:
     def __init__(self, records):
-        self.records = [Record(record) for record in records]
+        self.records = records
 
 
 class Record:
