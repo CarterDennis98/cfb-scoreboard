@@ -59,6 +59,7 @@ def get_team_ranking(school: str, rankings: Rankings) -> int:
 
 def get_team_record(team: str, records: list[Record]):
     if len(records) > 0:
+        print(records)
         return [record for record in records if record.team == team][0]
     else:
         return None
