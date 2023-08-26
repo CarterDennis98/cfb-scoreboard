@@ -19,6 +19,7 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
             str(team.ranking).startswith("2")
             or str(team.ranking).startswith("4")
             or str(team.ranking).startswith("5")
+            or str(team.ranking).startswith("6")
             or str(team.ranking).startswith("8")
         ):
             return 6
