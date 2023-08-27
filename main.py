@@ -46,19 +46,19 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
     elif feature == "record":
         if team.record:
             if len(str(team.record.wins)) == 2 or len(str(team.record.losses)) == 2:
-                return 49
-            else:
                 return 44
+            else:
+                return 49
         else:
             return 49
     elif feature == "updated record":
         if team.record:
             if len(str(team.record.wins)) == 2 or len(str(team.record.losses)) == 2:
-                return 39
+                return 37
             else:
-                return 34
+                return 42
         else:
-            return 39
+            return 42
 
 
 def get_poss(game: GameScoreboard, y: str) -> int:
