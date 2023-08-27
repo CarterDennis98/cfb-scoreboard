@@ -51,6 +51,14 @@ def get_draw_start(team: ScoreboardTeam, feature: str) -> int:
                 return 44
         else:
             return 49
+    elif feature == "updated record":
+        if team.record:
+            if len(str(team.record.wins)) == 2 or len(str(team.record.losses)) == 2:
+                return 39
+            else:
+                return 34
+        else:
+            return 39
 
 
 def get_poss(game: GameScoreboard, y: str) -> int:
@@ -98,7 +106,7 @@ def draw_scheduled_game(game: GameScoreboard):
     # Draw team records
     draw.text(
         (get_draw_start(game.home_team, "record"), -1),
-        f"{game.home_team.record.wins or 0} - {game.home_team.record.losses or 0}"
+        f"{game.home_team.record.wins or 0}-{game.home_team.record.losses or 0}"
         if game.home_team.record
         else "0-0",
         font=font,
@@ -106,7 +114,7 @@ def draw_scheduled_game(game: GameScoreboard):
     )
     draw.text(
         (get_draw_start(game.away_team, "record"), 6),
-        f"{game.away_team.record.wins or 0} - {game.away_team.record.losses or 0}"
+        f"{game.away_team.record.wins or 0}-{game.away_team.record.losses or 0}"
         if game.away_team.record
         else "0-0",
         font=font,
@@ -257,6 +265,18 @@ def draw_completed_game(game: GameScoreboard):
     draw.text((0, 13), "FINAL", font=font, fill=white_fill)
 
     # TODO: Draw new records
+    draw.text(
+        (get_draw_start(game.home_team, "updated record"), -1),
+        f"{game.home_team.record.wins or 0}-{game.home_team.record.losses or 0}",
+        font=font,
+        fill=white_fill,
+    )
+    draw.text(
+        (get_draw_start(game.away_team, "updated record"), 6),
+        f"{game.away_team.record.wins or 0}-{game.away_team.record.losses or 0}",
+        font=font,
+        fill=white_fill,
+    )
 
     # Draw Logos
     logo_size = (32, 32)
